@@ -29,7 +29,7 @@ router.get('/tasks', auth, async (req, res) => {
                 sort
             }
         }).execPopulate();
-        res.send(req.user.tasks);
+        res.status(200).send(req.user.tasks);
     }catch(e){
         res.status(500).send(e);
     }
@@ -58,9 +58,9 @@ router.post('/tasks', auth, async (req, res) => {
 
     try {
         await task.save();
-        res.status(201).send('Success!');
+        res.status(201).send(task);
     } catch(e) {
-        res.status(400).send(error);
+        res.status(400).send();
     }
 });
 
